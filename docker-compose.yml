@@ -1,0 +1,23 @@
+version: '3.1'
+
+services: 
+  bitbucket:
+    image: atlassian/bitbucket-server:7.5.2-ubuntu-jdk11
+    ports:
+      - "7990:7990"
+      - "7999:7999"
+    volumes:
+      - bitbucketVolume:/var/atlassian/application-data/bitbucket
+    
+  jenkins:
+    image: main_jenkins
+    ports:
+      - "8081:8080"
+      - "50000:50000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - jenkinsHome:/var/jenkins_home
+
+volumes:
+  bitbucketVolume:
+  jenkinsHome:
