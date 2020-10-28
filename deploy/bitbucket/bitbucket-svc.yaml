@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: bitbucket
+spec:
+  selector:
+    app: bitbucket
+  ports:
+  - name: bitbucket-http
+    port: 7990
+    targetPort: bitbucket-http
+  - name: bitbucket-ssh
+    port: 22
+    targetPort: bitbucket-ssh
+  type: NodePort

@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: bitbucket
+spec:
+  serviceName: "bitbucket"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bitbucket
+  template:
+    metadata:
+      labels:
+        app: bitbucket
+    spec:
+      containers:
+      - name: bitbucket
+        image: atlassian/bitbucket-server:7.7.0
+        ports:
+        - containerPort: 7990
+          name: bitbucket-http
+        - containerPort: 22
+          name: bitbucket-ssh
+        env:
+        - name: SERVER_SECURE
+          value: "true"
+        - name: SERVER_SCHEME
+          value: "https"
+        - name: SERVER_PROXY_PORT
+          value: "443"
+        - name: SERVER_PROXY_NAME
+          value: ""
+        volumeMounts:
+        - name: bitbucket-data
+          mountPath: /var/atlassian/application-data/bitbucket
+  volumeClaimTemplates:
+  - metadata:
+      name: bitbucket-data
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 10Gi
+
+

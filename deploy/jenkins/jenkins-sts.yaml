@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: jenkins
+spec:
+  serviceName: "jenkins"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jenkins
+  template:
+    metadata:
+      labels:
+        app: jenkins
+    spec:
+      containers:
+      - name: jenkins
+        image: jenkinsci/blueocean:1.24.2
+        ports: 
+        - containerPort: 8080
+          name: jenkins-http
+        - containerPort: 22
+          name: jenkins-ssh
+        env:
+        - name: SERVER_SECURE
+          value: "true"
+        - name: SERVER_SCHEME
+          value: "https"
+        - name: SERVER_PROXY_PORT
+          value: "443"
+        - name: SERVER_PROXY_NAME
+          value: ""
+        volumeMounts:
+        - name: jenkins-data
+          mountPath: /var/jenkins_home
+  volumeClaimTemplates:
+  - metadata:
+      name: jenkins-data
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 10Gi
+
+
