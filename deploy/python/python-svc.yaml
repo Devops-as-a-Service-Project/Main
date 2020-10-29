@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: daas-api
+spec:
+  selector:
+    app: daas-api
+  ports:
+  - name: daas-rest-api
+    port: 5001
+    targetPort: daas-rest-api
+  type: ClusterIP

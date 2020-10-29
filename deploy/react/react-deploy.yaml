@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: python-api
+  name: daas-ui
   labels:
-    app: python-api
+    app: daas-ui
 spec:
-  replicas: 2
+  replicas: 3
   selector:
     matchLabels:
-      app: python-api
+      app: daas-ui
   template:
     metadata:
       labels:
-        app: python-api
+        app: daas-ui
     spec:
       containers:
-      - name: python-api
-        image: amitmazor/daas-api:test
+      - name: daas-ui
+        image: amitmazor/daas-ui:2
         ports:
         - containerPort: 80
       
