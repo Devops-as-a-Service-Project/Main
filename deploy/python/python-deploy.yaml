@@ -5,7 +5,7 @@ metadata:
   labels:
     app: daas-api
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: daas-api
@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: daas-api
-        image: amitmazor/daas-api:2
+        image: amitmazor/daas-api:3
         ports:
         - containerPort: 5001
