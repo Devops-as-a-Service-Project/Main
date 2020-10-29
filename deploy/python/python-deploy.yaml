@@ -19,5 +19,3 @@ spec:
         image: amitmazor/daas-api:2
         ports:
         - containerPort: 5001
-      
-
