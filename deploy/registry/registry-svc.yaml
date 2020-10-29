@@ -3,10 +3,13 @@ kind: Service
 metadata:
   name: registry
 spec:
+  ports:
+  - nodePort: 31382
+    port: 5000
+    protocol: TCP
+    targetPort: 5000
   selector:
     app: registry
-  ports:
-  - name: registry
-    port: 5000
-    targetPort: registry
   type: NodePort
+
+

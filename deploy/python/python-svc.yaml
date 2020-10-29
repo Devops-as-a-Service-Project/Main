@@ -1,12 +1,15 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: daas-api-svc
+  labels:
+    app: daas-api
+  name: daas-api
 spec:
+  ports:
+  - nodePort: 30123
+    port: 5001
+    protocol: TCP
+    targetPort: 5001
   selector:
     app: daas-api
-  ports:
-  - name: daas-rest-api
-    port: 5001
-    targetPort: daas-rest-api
-  type: ClusterIP
+  type: NodePort
