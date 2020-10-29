@@ -1,12 +1,15 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: daas-ui-svc
+  labels:
+    app: daas-ui
+  name: daas-ui
 spec:
+  ports:
+  - nodePort: 30664
+    port: 80
+    protocol: TCP
+    targetPort: 80
   selector:
     app: daas-ui
-  ports:
-  - name: daas-http-ui
-    port: 80
-    targetPort: daas-http-ui
   type: NodePort
